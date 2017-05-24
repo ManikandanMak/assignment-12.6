@@ -1,0 +1,13 @@
+create table if not exists show(year string,              
+    > gko string, show string, group string, rgl string) 
+    > row format delimited fields terminated by ','; 
+
+load data local inpath '/home/acadgild/Downloads/dialy_show_guests' into table show; 
+
+create table show2(gko string,validity string);
+
+insert overwrite table show2 
+select gko,between(show) from show;
+
+select gko,count(validity) as c from show2 where validity = 'true' group by gko order by c desc limit 5;
+

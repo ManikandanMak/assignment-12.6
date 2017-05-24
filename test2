@@ -1,0 +1,23 @@
+package userdefined;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.apache.hadoop.hive.ql.exec.UDF;
+
+public class concat extends UDF{
+	public String evaluate (String input1)throws ParseException {
+		Date date1 = new SimpleDateFormat("mm/dd/yy").parse(input1);
+		Date date2 = new SimpleDateFormat("mm/dd/yy").parse(input1);
+		Date date3 = new SimpleDateFormat("mm/dd/yy").parse(input1);
+		if(date1.after(date2) && date3.before(date1))
+		{
+			return "true";
+		}
+		else
+		{
+			return "false";
+		}
+	}
+}
